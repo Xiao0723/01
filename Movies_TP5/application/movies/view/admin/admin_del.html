@@ -1,0 +1,71 @@
+{extend name="admin" /}
+{block name="title"}<title>继承admin页面</title>{/block}
+{block name="main-upd-del"}
+{volist name='list' id='user'}
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+     <div class="layui-col-md5">
+      <div class="layui-card">
+        <div class="layui-card-header">Id号：{$user.Id}</div>
+        <div class="layui-card-header">图片路径：{$user.m_image}</div>
+        <div class="layui-card-header">作品名：{$user.m_name}</div>
+        <div class="layui-card-header">类型：{$user.m_kind}</div>
+      </div>
+    </div>
+    <div class="layui-col-md7">
+      <div class="layui-card">
+        <div class="layui-card-header">主演人员：</div>
+        <div class="layui-card-body">
+        {$user.m_content}
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md7">
+      <div class="layui-card">
+        <div class="layui-card-header">作品描述：</div>
+        <div class="layui-card-body">
+        {$user.m_describe}
+        </div>
+      </div>
+    </div> 
+    <div class="layui-col-md2">
+      <div class="layui-card">
+        <div class="layui-card-header site-demo-button " id="layerDemo" >
+        <a href="admin_delete_check?id={$user.Id}">
+        <button type="button" class="layui-btn layui-btn-normal layui-btn-sm">
+        <i class="layui-icon"></i>
+        </button>
+        </a>
+        <a href="#">
+         <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+        </a>
+        <a href="#">
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+layui.use('layer', function(){ //独立版的layer无需执行这一句
+  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+  //触发事件
+  var active = {
+    confirmTrans: function(){
+      //配置一个透明的询问框
+      layer.msg('大部分参数都是可以公用的<br>合理搭配，展示不一样的风格', {
+        time: 20000, //20s后自动关闭
+        btn: ['明白了', '知道了', '哦']
+      });
+    }
+  };
+  $('#layerDemo .layui-btn').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    active[method] ? active[method].call(this, othis) : '';
+  });
+});
+</script> 
+{/volist}
+    {$list->render()}
+{/block}

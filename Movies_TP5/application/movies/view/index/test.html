@@ -1,0 +1,30 @@
+{extend name="admin" /}
+{block name="title"}<title>继承admin页面</title>{/block}
+{block name="main-upd-del"}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+  <legend>选完文件后不自动上传</legend>
+</fieldset>
+ 
+<div class="layui-upload">
+  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+  <button type="button" class="layui-btn" id="test9">开始上传</button>
+</div>
+<script>
+layui.use('upload', function(){
+  var $ = layui.jquery
+  ,upload = layui.upload;
+  //选完文件后不自动上传
+  upload.render({
+    elem: '#test8'
+    ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+    ,auto: false
+    //,multiple: true
+    ,bindAction: '#test9'
+    ,done: function(res){
+      layer.msg('上传成功');
+      console.log(res)
+    }
+  });
+});
+</script>
+{/block}

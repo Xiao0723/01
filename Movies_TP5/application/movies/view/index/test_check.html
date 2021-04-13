@@ -1,0 +1,22 @@
+{extend name="admin" /}
+{block name="title"}<title>继承admin页面</title>{/block}
+{block name="main-d2"}
+
+{/block}
+{block name="main-select"}
+{volist name='list' id='m_select'}
+<tr>
+    <td></td>       
+    <td>{$m_select.Id}</td>
+    <td>{$m_select.m_image}</td>
+    <td>{$m_select.m_name}</td>
+    <td>{$m_select.m_kind}</td>
+    <td>{$m_select.m_content}</td>
+    <td>{$m_select.m_describe}</td>
+    <td>
+        <a href="admin_update_check?id={$m_select.Id}">修改</a>
+        | <a href="admin_delete_check?id={$m_select.Id}">删除</a>
+    </td>
+</tr>
+{/volist}
+{/block}
